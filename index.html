@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body{
+                background: #1d1d1d;
+            }
+            .myspan{
+                font-size: 4em;
+                font-weight: 800;
+                font-family: open sans,sans-serif;
+                color:#fff; 
+                padding-top:100px;          
+            }.myspan > span:first-child{
+                color:red;
+                text-shadow: -7px 0px 0px #5fddd8;
+            }.myspan > span{
+                float:left;
+                transition:all 0.4s ease-out;
+            }.myspan > span:not(.myspan > span:first-child):hover{
+                color:#5fddd8;
+                animation-play-state: running;
+            }.myspan > span:not(.myspan > span:first-child){
+                animation:jiggle 1s cubic-bezier(0, 1.95, 1, -1.09) 1 paused;                
+            }
+            @keyframes jiggle {
+                0%{
+                    transform:scale(1,1);
+                }                              
+                50%{
+                    transform:scale(1.5,0.6);
+                }
+                75%{
+                    transform:scale(1.75,0.7);      
+                }
+                100%{
+                    transform:scale(1,1);
+                }
+            }.element{
+                color: #fff;
+                font-size: 4rem;
+                margin-top:100px; 
+            }
+        </style>        
+    </head>
+    <body><div class="row element">Hi,
+    </div><div class="element"><span>I'm</span>
+        <span class="myspan"><span>J</span>
+        <span>a</span>
+        <span>c</span>
+        <span>k</span>
+   
+    </span></div>
+        
+    </body>
+</html>

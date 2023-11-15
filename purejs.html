@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="a_body">
+
+    <script>
+       var h = document.createElement('header');
+       h.innerHTML='header';
+       console.log(h);
+       document.getElementById('a_body').appendChild(h);
+       document.querySelector('header').setAttribute('class','a_header');
+       document.body.style.margin='0px';
+       var x =document.getElementByClassName('a_header');
+       x[0].style.width ='100%';
+       x[0].style.height ='150px';
+       
+       x[0].style.border='2px solid #ddd';
+
+
+
+
+       //console.log(x=[0]);
+       //console.log();
+    </script>
+</body>
+</html>
