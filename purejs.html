@@ -14,16 +14,89 @@
        document.getElementById('a_body').appendChild(h);
        document.querySelector('header').setAttribute('class','a_header');
        document.body.style.margin='0px';
-       var x =document.getElementByClassName('a_header');
+       var x = document.getElementsByClassName('a_header');      
        x[0].style.width ='100%';
-       x[0].style.height ='150px';
-       
+       x[0].style.height ='150px';  
+       x[0].style.color='green';       
+
        x[0].style.border='2px solid #ddd';
+       var x =document.getElementsByTagName('header');
+       x[0].style.fontSize='3em';
+       x[0].style.textAlign='center'; 
+       x[0].style.lineHeight='150px';  
+       let n = document.createElement('nav');
+       n.innerHTML='nav';
+       document.body.appendChild(n); 
+       var x= document.querySelectorAll('nav');
+       x[0].getElementsByClassName('class','a_nav');
+       x[0].style.width='100%';
+       x[0].style.height='90px';
+       x[0].style.fontSize='3rem';
+       x[0].style.textAlign='center';
+       x[0].style.color='green';
+       x[0].style.border='5px solid #ddd';
 
+       var a=document.createElement('aside');
+       a.innerHTML='aside';
+       document.body.appendChild(a);
+       var x=document.querySelectorAll('aside');
+       x[0].getElementsByTagName('aside');
+       x[0].style.width='25%';
+       x[0].style.color='green';
+       x[0].style.height='300px';
+       x[0].style.fontSize='3rem';
+       x[0].style.textAlign='center';
+       x[0].style.border='5px solid #ddd';
 
+       let s = document.createElement('section');
+       s.innerHTML='section';
+       console.log(s); 
+       document.body.appendChild(s);
+       var x=document.querySelectorAll('section');
+       x[0].setAttribute('data-sec','sec1');
+       document.querySelector('section[data-sec="sec1"]').style.textAlign='center';
+       document.querySelector('section[data-sec="sec1"]').style.color='green';
+       document.querySelector('section[data-sec="sec1"]').style,fontSize='3rem';
+        var ss= document.querySelector('section');
+        ss.style.width='50%';
+        ss.style.height='300px';
+        ss.style.fontSize='3rem';
+        ss.style.display='inline-block';
+        ss.style.border='5px solid #ddd';
 
-
-       //console.log(x=[0]);
+       var aa=document.createElement('aside1');
+       aa.innerHTML='aside1';
+       document.body.appendChild(aa);
+       var x=document.querySelectorAll('aside1');
+       x[0].getElementsByTagName('aside1');
+       x[0].style.width='25%';
+       x[0].style.color='green';
+       x[0].style.height='300px';
+       x[0].style.fontSize='3rem';
+       x[0].style.textAlign='center';
+       
+       var arr=document.querySelectorAll('aside');
+       console.log(arr);
+       arr.forEach(function(currentValue, index, arr){
+       arr[index].style.display='inline-block';
+       });
+       let f = document.createElement('footer');       
+       f.innerHTML= 'footer';
+       console.log(f);
+       document.body.appendChild(f);
+       var x=document.querySelectorAll('footer');
+       //console.log(x[0]);
+       x[0].setAttribute('data-foot','foot1');
+       document.querySelector('footer[data-foot="foot1"]').style.textAlign='center';
+       document.querySelector('[data-foot="foot1"]').style.color='green';
+       document.querySelector('[data-foot]').style.lineHeight='150px';
+       var ff =document.querySelector('footer');
+       ff.style.width='100%';
+       ff.style.height='150px';
+       ff.style.width='5px solid #ddd';
+       ff.style.fontSize='3em';
+       ff.style.border='5px solid #ddd';
+      //console.log(x=[0]);
        //console.log();
     </script>
 </body>

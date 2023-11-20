@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var h= document.createElement('header');
+        h.innerHTML = 'Header';
+        console.log(h);
+        h.setAttribute('class',"a_header");
+        document.body.appendChild(h);
+        var d= document.createElement('div');
+        d.innerHTML = 'Div';
+        console.log(d);
+        document.body.appendChild(d);
+         document.querySelector('header.a_header ~ div').setAttribute('class',"a_main");
+         var x= document.getElementsByClassName('a_main');
+         console.log(x[0]);
+         x[0].style.color='red';
+        var f= document.createElement('footer');
+        f.innerHTML = 'Footer';
+        console.log(f);
+        var de=document.querySelector('div').innerHTML='main area';
+        document.body.appendChild(f);
+        var fe = document.querySelector('div ~ footer');
+        fe.innerHTML='Footer';
+        var b = document.createElement('button');
+        b.innerHTML='click me!';
+        console.log(b);
+        fe.appendChild(b);
+       var bu= document.getElementsByTagName('button');
+       console.log(bu[0]);
+       bu[0].addEventListener('click',function(){
+        alert("you clicked me");
+        h.style.color='green';
+        f.style.color='blue';
+       });
+    </script>
+</body>
+</html>
