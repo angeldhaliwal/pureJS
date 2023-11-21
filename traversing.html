@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>traversing up</title>
+    </head>
+    <body>
+
+        <div class="gp" id="grandparent">grandparent
+            <div class="p">parent
+                <div class="c">child
+                    <div class="gc gc1"> grandchildren</div>
+                    <div class="gc gc2"> grandchildren</div>
+                </div>
+            </div>
+        </div>
+        <script>
+         var gc=  document.querySelector('div.gc');
+         console.log(gc);
+         gc.closest('div.gp').style.border='1px solid #ddd';
+         gc.closest('.p').style.border='1px solid blue';
+         gc.closest('.c').style.border='1px solid green';
+         
+// traversing up
+         p=document.getElementById('grandparent');
+         p.querySelector('div.gc.gc1').style.color='orange';
+         p.querySelector('div.p').style.color="red";
+        </script>
+        
+    </body>
+</html>
