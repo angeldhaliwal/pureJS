@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+
+
+        <script>
+          function createMyElement(elem){
+            return document.createElement(elem);
+           }
+           function setAttributeFromObject(element,Obj){
+             for(const key in Obj){
+                element.setAttribute(key,Obj[key])
+             }
+             return element;
+             }
+           var link= document.createElement('link') ;
+           var script=document.createElement('script');          
+           
+           var myObject={
+            "href":"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css",
+            "rel":"stylesheet",
+           };
+           var scriptObj= {
+            "src":"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+           }
+            var link =setAttributeFromObject(link,myObject);
+            var script=setAttributeFromObject(script,scriptObj);
+          console.log(link);          
+          console.log(script);
+           
+
+          function appendToHead(elem){
+            document.head.append(elem);
+          }
+          appendToHead(link);
+           appendToHead(script);
+
+           var h=createMyElement('header');
+           var headerTop=createMyElement('div');
+           var headerTopInner=createMyElement('div');
+           var headerBottomInner=createMyElement('div');
+
+    
+           var headerBottom=createMyElement('div');
+           headerBottom= setAttributeFromObject(headerBottom,{"class":"a_headerBottom"});
+           headertop=setAttributeFromObject(headerTop,{ "class":"a_headerTop"});
+           h=setAttributeFromObject(h,{"class":"a_header"});
+           headerTopInner=setAttributeFromObject(headerTopInner,{"class":"container"});
+           headerBottomInner=setAttributeFromObject(headerBottomInner,{"class":"container"});
+
+           headerTop.classList.add('container');
+           console.log(headerBottom);
+           console.log(headerTop);
+           console.log(h);
+           headerTop.append(headerTopInner);
+           headerBottom.append(headerBottomInner);
+
+           document.body.append(h);
+           h.append(headerTop);
+           h.append(headerBottom)
+           function select(selector){
+            return document.querySelector(selector)
+           }
+           var styleObj={
+            "height":'169px',
+            "border":'1px solid #000',
+           }
+           //select('.a_header').style.height="169px";
+           //select('.a_header').style.border="1px solid #000";
+
+           select('.a_headerTop').style.height="58px";
+           select('.a_headerTop').style.backgroundColor="#2874f0";
+
+           select('.a_headerBottom').style.height="111px";
+           select('.a_headerBottom').style.border="1px solid red";
+
+          select('.a_headerTop > div.container').style.border="1px solid pink";
+          select('.a_headerTop > div.container').style.height="100%";
+
+          document.querySelector('.a_headerBottom > div.container').style.border='1px solid yellow';
+          document.querySelector('.a_headerBottom > div.container').style.height='100%';
+
+
+
+
+
+        </script>
+    </body>
+</html>
