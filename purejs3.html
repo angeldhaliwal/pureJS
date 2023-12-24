@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="myStudent">
+        <li> amit </li>     
+        <li> aman </li>
+    </ul>
+    <button onclick="addNewStudent('kiran')">
+        add New Student
+    </button>
+    <script>
+        var student=[];
+        function addNewStudent(elem){
+           // alert('ok');
+           console.log(student);
+         var s= prompt('enter name of student');
+            //array.find(function(current value, index,arr),thisValue)
+            var isAvailable=false;
+           isAvailable= student.find(function(currentValue, index,arr){
+                return (currentValue==s)?true:false;//ternary operator
+            });
+
+         if(isAvailable){
+         }else{
+            student.push(s);//add new element into arry
+         console.log(s);
+         l= document.createElement('li');
+        l.innerHTML=s;
+          //var t= document.createTextNode(s);
+         // l.append(s)
+        console.log(l);       
+        var x= document.getElementById("myStudent");
+        console.log(x.childNodes);
+        console.log(x.childNodes[1]);
+        //x.appendChild(l)
+       x.insertBefore(l,x.childNodes[1]);
+       // x.insertBefore(l,document.querySelector('#myStudent > l: first-child'));
+        var l;}
+        //arry create
+
+        
+}
+    </script>
+
+</body>
+</html>
