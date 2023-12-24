@@ -18,6 +18,9 @@
              }
              return element;
              }
+              function appendToBody(elem){
+                document.body.append(elem);
+               }
            var link= document.createElement('link') ;
            var script=document.createElement('script');          
            
@@ -60,7 +63,7 @@
            headerTop.append(headerTopInner);
            headerBottom.append(headerBottomInner);
 
-           document.body.append(h);
+           appendToBody(h);
            h.append(headerTop);
            h.append(headerBottom)
            function select(selector){
@@ -86,8 +89,165 @@
           document.querySelector('.a_headerBottom > div.container').style.height='100%';
 
 
+               var f= document.createElement('footer');
+               var main=createMyElement('div');
+               main.setAttribute('class',"a_main");
+               console.log(main);
+               console.log(f);
+
+              
+              appendToBody(main);
+              appendToBody(f);
+              var myStyle= {
+                backgroundColor:'blue',
+                height:'12255px'
+              }
+              function applyStyleToElement(selector,styleObject){
+                for(const key in styleObject){
+                console.log(styleObject[key]);
+                console.log( document.querySelector(selector).style[key]);
+
+               document.querySelector(selector).style[key]=styleObject[key];
+              }
+            }
+            applyStyleToElement('.a_main',myStyle);
+
+             // document.querySelector('.a_main').style.backgroundColor='blue';
+             // document.querySelector('.a_main').style.height='12255px';
+              
+            document.querySelector('footer').setAttribute('class',"a_footer")
+
+            var myStyle= {
+                backgroundColor:'orange'
+               
+              }
+              applyStyleToElement('.a_footer',myStyle);
+              var footerTop= createMyElement('div');
+                  console.log(footerTop);
+                  function appendToElement(elem,selector){
+                   document.querySelector(selector).append(elem);
+                  }
+            appendToElement(document.createElement('div'),'footer');
+            appendToElement(document.createElement('div'),'footer');
+
+           var ft= document.querySelector('footer > div:first-child')
+           ft.innerHTML='footerTop';
+           ft.style.height='2722px';
+           ft.style.background='purple';
+           document.querySelector('footer > div:last-child').innerHTML='footerBottom';
+           ft.innerHTML='footerBottom';
+           ft.style.height='497px';
+           ft.style.background='red';
+          
+
+           
+          
+           var u = createMyElement('ul');
+           u.setAttribute('class',"nav")
+          
+           var o={
+            count:4,
+              createElement:function(elem){
+                return document.createElement(elem);
+              }
+            }
+            
+              for(let i=0;i<o.count;i++){
+                var l= o.createElement('li');
+                var a=o.createElement('a');
+                a.classList.add('nav-link');
+                a.setAttribute('href',"#");
+                a.textContent=i;
+                a.style.color='white';
+                if(i==0){
+                  a.classList.add('active');
+                }
+               
+                l.setAttribute('class',"nav-item")
+                l.append(a);
+                u.append(l);
+                document.querySelector('.a_headerTop > div.container').append(u);
+              }
+              console.log(u);
+              
+             
+              var fo = document.createElement('form');
+              console.log(fo);
+              var f1=createMyElement('div');
+              f1.setAttribute('class',"mb-3");
+              console.log(f1);
+              var f2=createMyElement('div');
+              f2.setAttribute('class',"mb-3")
+
+              console.log(f2);
+              var f3=createMyElement('div');
+              f3.setAttribute('class',"mb-3, form-check");
+              console.log(f3);
+              fo.append(f1);
+              fo.append(f2);
+              fo.append(f3);
+              var lable1= createMyElement('lable');
+              console.log(lable1);
+              lable1.setAttribute('for',"exampleInputEmail");
+              lable1.classList.add('form-lable'); 
+              lable1.innerHTML='email';            
+              f1.append(lable1);
+
+              var lable2= createMyElement('lable');
+              console.log(lable2);
+              lable2.setAttribute('for',"exampleInputPassword");
+              lable2.classList.add('form-lable');             
+              f2.append(lable2);
+
+              var lable3= createMyElement('lable');
+              console.log(lable3);
+              lable3.setAttribute('for',"examplecheck1");
+              lable3.classList.add('form-check-lable');             
+              f3.append(lable3);
+
+              var input=createMyElement('input');
+              input.setAttribute('type',"email");
+              input.classList.add('class',"form-control");
+              input.setAttribute('id',"exampleInputEmail");
+              input.setAttribute('aria-describedby',"emailHelp");
+        
+              f1.append(input);
+
+              var i2=createMyElement('input');
+              i2.setAttribute('type',"password");
+              i2.classList.add('class',"form-control");
+              i2.setAttribute('id',"exampleInputPassword");
+            
+              f2.append(i2);
+
+              var i3=createMyElement('input');
+              i3.setAttribute('type',"checkbox");
+              i3.classList.add('class',"form-control");
+              i3.setAttribute('id',"exampleInputcheckHelp");
+              
+              
+              f3.append(i3);
+              var email=createMyElement('div');
+              email.setAttribute('id',"emailhelp");
+              email.classList.add('class',"form-text");
+              email.innerHTML='enter your email';
+              f1.append(email);
+              var button=createMyElement('button');
+              button.setAttribute('type',"submit");
+              button.classList.add('class',"btn", "btnprimery");
+              button.innerHTML='submit';
+              fo.append(button);
+
+              document.querySelector('.a_headerTop >div.container >ul > li:nth-child(2)').remove();
+             document.querySelector('.a_headerTop >div.container >ul > li:nth-child(2) > a').append(fo);
 
 
+
+
+
+
+            
+           // console.log(o.createElement('li'));
 
         </script>
     </body>
