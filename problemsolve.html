@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            var obj={};
+
+            var arr=[1,2,3,2,3,3,4,1,55,6,5,3,54,5,0,7,9,7];
+            /*arr.forEach(element=>{
+                console.log(element);
+            });
+            aar.forEach(element)=>{
+                console.log(element);
+            }
+            */
+            arr.forEach(function(currentValue,index,arr)  {
+                console.log(currentValue);
+              
+               if(!obj==0){
+               // console.log(' notempty');
+               obj[currentValue]=1;
+              
+               }else{
+                //console.log('not empty');
+                 
+               
+               for (var key in obj) {
+                key= parseInt(key)
+               console.log(key);
+                console.log(currentValue);
+
+               if(key == currentValue){
+               
+                console.log('ok');
+                obj[key]=obj[key]+1;
+            }
+               if (!Obj.hasOwnProperty(currentValue)) {
+                   obj[currentValue] = 1; 
+                   // console.log('not ok');
+
+                }
+               }
+                    
+             }
+            }
+              /* if(object.keys(obj).length === 0){
+                    obj[currentValue]=1;
+                 //console.log(typeof object);
+            }else{             
+          
+            for (var key in obj) {                        
+                key= parseInt(key);
+                if (key == currentValue){
+                    obj[key]=obj[key]+1;
+                }
+                                   
+                }
+            }
+            if(key == currentValue) {
+                    console.log(obj[key] + currentValue);
+                 }
+               }*/
+                );
+             //console.log(obj);
+           
+        
+            
+        </script>
+    </body>
+</html>
