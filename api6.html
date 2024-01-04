@@ -1,11 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body a_modal-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item">A second item</li>
+                            <li class="list-group-item">A third item</li>
+
+                        </ul>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="spinner-border text-warning a_loader invisible" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <script>
+            let loader = document.querySelector('.a_loader')
+            $.ajax({
+                url: 'https://fakerestapi.azurewebsites.net/api/v1/CoverPhotos',
+                type: 'GET',
+                success: function (result, status, xhr) {
+                    loader.classList.add('invisible');
+                    console.log(result);
+                    var tr = `<table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">id</th>
+                                                <th scope="col">idBook</th>
+                                                <th scope="col">url</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>`;
+                    result.forEach(element => {
+                        console.log(element);
+                        tr += `<tr>
+                                    <td>`+ element.id + `</td>                    
+                                    <td>`+ element.idBook + `</td>
+                                    <td><a href="`+ element.url + `" target="_blank">link</a></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-success mybtn" data-bs-toggle="modal" data-bs-target="#exampleModal">View</button>
+                                        <button class="btn btn-sm btn-info">Edit</button>
+                                        <button class="btn btn-sm a_mybtn btn-danger">Delete</button>
+                                    </td>
+                                </tr>`;
+                    });
+                    console.log(tr);
+                    tr += ` </tbody>
+                            </table>`;
+                    document.body.innerHTML += tr;
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }, beforeSend: function (xhr) {
+                    loader.classList.remove('invisible');
+                    console.log(xhr);
+                },
+                complete: function () {
+                    loader.classList.add('invisible');
+                }
+
+            });
+            document.addEventListener('click', function (e) {
+                //console.log(e);
+                if (e.target.classList.contains('mybtn')) {
+                    console.log('yes');
+                    let id = e.target.closest('tr').querySelector('td:first-child').innerHTML;
+                    let idBook = e.target.closest('tr').querySelector('td:nth-child(2)').innerHTML;
+                    let link= e.target.closest('tr').querySelector('td:nth-child(3) > a').getAttribute('href'); 
+                    console.log(e.target.closest('tr').querySelector('td:nth-child(3) > a').getAttribute('href'));
+                    let lg = document.querySelector('.a_modal-body > .list-group');
+                    lg.querySelector('li:first-child').innerHTML = id;
+                    lg.querySelector('li:nth-child(2)').innerHTML = idBook;
+                    lg.querySelector('li:last-child').innerHTML=link;
+                    console.log(e.target.closest('tr').querySelector('td:first-child'));
+
+                    console.log(e.target.closest('tr').querySelector('td:nth-child(2)'));
+
+                }//else{
+                //  console.log('no');   
+                if (e.target.classList.contains('a_mybtn')){
+                    console.log('yes');
+                    var tr= e.target.closest('tr');
+                    var del=tr.querySelector('td:first-child').innerHTML;
+                    $.ajax({
+                        url: 'https://fakerestapi.azurewebsites.net/api/v1/CoverPhotos/'+del,
+                        type: 'DELETE',
+                        beforeSend:function(){
+
+                        },
+                        success:function(){  
+                            tr.remove();                      
+                            alert('messege delete');                          
+
+                        },
+                        error:function(){
+
+                        }
+                    })
+                }               
+
+                // }
+            });
+
+        </script>
+    </body>
+
 </html>
