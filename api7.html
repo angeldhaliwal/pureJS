@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+    <body>      
+  
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                ...
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">password</th>
+                <th scope="col">userName</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                         
+            </tbody>
+          </table>
+        <button class="btn btn-sm btn-success">get user</button>
+        <script>
+             var obj={
+                url:"https://fakerestapi.azurewebsites.net",
+                type:"GET"
+               }
+            document.querySelector('button.btn.btn-success').addEventListener('click',function(){
+               // alert('ok');
+              
+               $.ajax({
+                ...obj,
+                url:obj.url+'/api/v1/Users',
+              beforeSend:function(xhr){
+
+              },success:function(result,status,xhr){
+                    console.log(result);
+                    var tr='';
+                    result.forEach(element => {
+                        console.log(element);
+                        tr +=`<tr>
+                            <td>`+element.id+`</td>                            
+                            <td>`+element.password+`</td>
+                            <td>`+element.userName+`</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary a_view" data-bs-toggle="modal" data-bs-target="#exampleModal">veiw</button>
+                                <button class="btn btn-sm btn-info a_edit">Edit</button>
+                                <button class="btn btn-sm btn-danger a_del">Delete</button>  
+                                </td>
+                        </tr>`;
+                        console.log(tr);
+                    document.querySelector('table > tbody').innerHTML=tr;
+                    });
+                   
+              },error:function(xhr,status,error){
+
+              },complete:function(xhr,status){
+
+              }
+              
+
+               });
+            });
+            document.addEventListener('click',function(e){
+                console.log(e);
+                if(e.target.classList.contains('a_del')){
+                    console.log('yes');
+                    var userid = e.target.closest('tr').querySelector('td:first-child').innerHTML;
+                    e.target.closest('tr').remove();
+                    $.ajax({
+                        ...obj,
+                        url:obj.url+'/api/v1/Users/1'+userid,
+                        type:"DELETE",
+              beforeSend:function(xhr){
+
+              },
+               success:function(result,status,xhr){
+              toastr.success('deleted successfully')
+              },error:function(xhr,status,error){
+
+              },complete:function(xhr,status){
+
+}
+                        
+                    })
+                }else{
+                    console.log('No');
+                }
+            });
+        </script>
+    </body>
+</html>
