@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+    <body>
+        <div class="container">
+        <form id="myaddform">
+            <h1 class="text-center">ADD FORM</h1>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">tital</label>
+                <input name="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text"></div>
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">due date</label>
+                <input name="duedate" type="date" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3 ">                
+                <label class="form-check-label" for="exampleCheck1">is completed</label>
+                <select name="iscompleted" class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">yes</option>
+                    <option value="2">no</option>
+                </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+       </form><br><br><br><hr>
+        <div class="d-flex justify-content-center invisible a_loader" >
+            <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <button class="btn btn-success " data-mybtn="getdata">GET</button>
+    
+        <table class="table">
+            <thead>
+                
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">title</th>
+                <th scope="col">completed </th>
+                <th scope="col">dueDate</th>
+                <th scope="col">Action</th>
+            </tr>        
+            
+            </thead>
+            <tbody>
+            
+            
+            </tbody>
+        </table>
+    </div>
+        <script>
+            var obj={
+            url:'https://fakerestapi.azurewebsites.net',
+            type:'GET'
+            };
+        document.querySelector('[data-mybtn="getdata"]').addEventListener('click',function(){
+        })    
+        $.ajax({
+            ...obj,
+            url:obj.url+'/api/v1/Activities',
+            beforeSend:function(xhr){
+            document.querySelector('.a_loader').classList.remove('invisible');
+            },success:function(result,status,xhr){
+            document.querySelector('.a_loader').classList.add('invisible');
+
+                console.log(result);
+                var tr =``;
+                result.forEach(element => {
+                    console.log(element);
+                    tr +=`<tr>
+                                <td>`+element.id+`</td>
+                                <td>`+element.title+`</td>
+                                <td>`+element.completed+`</td>
+                                <td>`+element.dueDate+`</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success a_view">view</button>
+                                    <button class="btn btn-sm btn-info a_edit">edit</button>
+                                    <button class="btn btn-sm btn-danger a_del">delete</button>
+                                </td>
+                            </tr>`;                       
+                });
+                console.log(tr);
+                document.querySelector('table > tbody').innerHTML=tr;
+            },
+            error:function(xhr,status,error){
+
+            },complete:function(){
+
+            }
+        })   
+       document.getElementById('myaddform').onsubmit=function(e){
+        //alert('ok');
+        e.preventDefault();
+    console.log(e.target.querySelector('input[name="title"]').value);
+    let title= e.target.querySelector('input[name="title"]').value;
+    let duedate= e.target.querySelector('input[name="duedate"]').value;
+    let iscompleted =Boolean(e.target.querySelector('[name="iscompleted"]').value);
+    
+   console.log(duedate);
+   console.log(iscompleted);
+   var mydata ={
+                "id": 0,
+                "title": title,
+                "dueDate": duedate,
+                "completed": iscompleted
+               }   
+   $.ajax({
+    ...obj,
+    url:obj.url+'/api/v1/Activities',
+    type:"POST",
+    data:JSON.stringify(mydata),
+    dataType:'json',
+    contentType:'application/json',
+    success:function(result,status,xhr){
+    swal('good job','well done');//https://fakerestapi.azurewebsites.net
+
+    }
+   })
+
+
+
+   
+       }
+    </script>
+</body>
+</html>
